@@ -26,7 +26,7 @@ def handle_client(client, address):
         client_names[client] = name # Relaciona o socket ao name
         
         print(f"{name} ({address}) entrou no chat.")
-        send_to_all(f"{name} entrou no chat!".encode('utf-8'))
+        send_to_all(f"{name} entrou no chat! No endereço {address}.".encode('utf-8'))
         
         while True:
             data = client.recv(data_payload)
@@ -39,6 +39,13 @@ def handle_client(client, address):
             if message.startswith("@"):  # message privada
                 recipient, private_message = message[1:].split(" ", 1)
                 send_private_message(client, recipient, private_message)
+                
+            elif message == "/sair":
+                connected_clients.remove(client)
+                del client_names[client]
+                client.close()
+                print(f"{name} ({address}) desconectou.")
+                send_to_all(f"{name} saiu do chat.".encode('utf-8'))
             else:  # message pública
                 send_to_all(f"{name}: {message}".encode('utf-8'))
     except Exception as e:
