@@ -3,14 +3,14 @@ import tkinter as tk
 from tkinter import scrolledtext
 import threading
 
-HOST = "127.0.0.1" 
+HOST = "26.84.106.82" 
 PORT = 9999
 
 s = sock.socket(sock.AF_INET, sock.SOCK_STREAM)
 print(f"Conectando a {HOST}:{PORT}")
 s.connect((HOST, PORT))
 
-name = input("Digite seu npme: ")
+name = input("Digite seu nome: ")
 s.send(name.encode('utf-8')) #Envia o name para o servidor
 
 def send_message():

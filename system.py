@@ -1,7 +1,7 @@
 import socket as sock
 import threading
 
-HOST = "localhost"
+HOST = "26.84.106.82"
 PORT = 9999
 data_payload = 2048
 
